@@ -1,0 +1,13 @@
+diff --git a/node_modules/@primevue/nuxt-module/dist/module.mjs b/node_modules/@primevue/nuxt-module/dist/module.mjs
+index 7817794..4ead85c 100644
+--- a/node_modules/@primevue/nuxt-module/dist/module.mjs
++++ b/node_modules/@primevue/nuxt-module/dist/module.mjs
+@@ -239,7 +239,7 @@ ${hasTheme ? `import { Theme } from '@primeuix/styled';
+ ${importTheme ? `import ${importTheme.as} from '${normalize(importTheme.from)}';
+ ` : ""}` : ""}
+ 
+-const runtimeConfig = useRuntimeConfig();
++const runtimeConfig = undefined;
+ const config = runtimeConfig?.public?.primevue ?? {};
+ const { options = {} } = config;
+ 
