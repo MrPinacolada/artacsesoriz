@@ -16,4 +16,13 @@ export default defineNuxtConfig({
   experimental: {
     asyncContext: true,
   },
+  app: {
+    baseURL: "/artacsesoriz/",
+    buildAssetsDir: "/artacsesoriz/_nuxt/",
+  },
+  router: {
+    base: "/artacsesoriz/",
+  },
+  target: "static",
+  ssr: false,
 });
