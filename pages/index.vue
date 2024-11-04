@@ -53,7 +53,12 @@
       </Column>
       <template #expansion="slotProps">
         <div class="p-4">
-          <DataTable :value="(slotProps.data as Category).childs">
+          <DataTable
+            :value="(slotProps.data as Category).childs"
+            v-model:expandedRows="expandedRowsInner"
+            dataKey="id"
+          >
+            <Column expander style="width: 5rem" />
             <Column :header="columnsName[currentLang].name">
               <template #body="slotProps">
                 {{ localizedContent(slotProps.data as Category).cg_name }}
@@ -76,6 +81,36 @@
                 </div>
               </template>
             </Column>
+            <template #expansion="slotProps">
+              <div class="p-4">
+                <DataTable :value="(slotProps.data as Category).childs">
+                  <Column style="width: 7rem" />
+                  <Column :header="columnsName[currentLang].name">
+                    <template #body="slotProps">
+                      {{ localizedContent(slotProps.data as Category).cg_name }}
+                    </template>
+                  </Column>
+                  <Column :header="columnsName[currentLang].description">
+                    <template #body="slotProps">
+                      {{
+                        localizedContent(slotProps.data as Category)
+                          .cg_description
+                      }}
+                    </template>
+                  </Column>
+                  <Column :header="columnsName[currentLang].img">
+                    <template #body="slotProps">
+                      <div class="img-box">
+                        <img
+                          :src="(slotProps.data as Category).category_image||noimg"
+                          alt="img"
+                        />
+                      </div>
+                    </template>
+                  </Column>
+                </DataTable>
+              </div>
+            </template>
           </DataTable>
         </div>
       </template>
@@ -155,6 +190,7 @@ const columnsName = Object.freeze({
 
 const products = ref<Category[] | null>(null);
 const expandedRows = ref({});
+const expandedRowsInner = ref({});
 type Lang = keyof Category["locale"];
 
 const langs: Lang[] = ["ru", "fr", "en"];
